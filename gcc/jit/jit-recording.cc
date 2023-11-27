@@ -2534,18 +2534,34 @@ recording::memento_of_get_type::get_size ()
       return 1;
     case GCC_JIT_TYPE_SHORT:
     case GCC_JIT_TYPE_UNSIGNED_SHORT:
+    case GCC_JIT_TYPE_SHORT_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_SHORT_FRACT:
+    case GCC_JIT_TYPE_SHORT_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_SHORT_ACCUM:
       size = SHORT_TYPE_SIZE;
       break;
     case GCC_JIT_TYPE_INT:
     case GCC_JIT_TYPE_UNSIGNED_INT:
+    case GCC_JIT_TYPE_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_FRACT:
+    case GCC_JIT_TYPE_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_ACCUM:
       size = INT_TYPE_SIZE;
       break;
     case GCC_JIT_TYPE_LONG:
     case GCC_JIT_TYPE_UNSIGNED_LONG:
+    case GCC_JIT_TYPE_LONG_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_FRACT:
+    case GCC_JIT_TYPE_LONG_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_ACCUM:
       size = LONG_TYPE_SIZE;
       break;
     case GCC_JIT_TYPE_LONG_LONG:
     case GCC_JIT_TYPE_UNSIGNED_LONG_LONG:
+    case GCC_JIT_TYPE_LONG_LONG_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG_FRACT:
+    case GCC_JIT_TYPE_LONG_LONG_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG_ACCUM:
       size = LONG_LONG_TYPE_SIZE;
       break;
     case GCC_JIT_TYPE_UINT8_T:
@@ -2667,6 +2683,22 @@ recording::memento_of_get_type::dereference ()
     case GCC_JIT_TYPE_COMPLEX_FLOAT:
     case GCC_JIT_TYPE_COMPLEX_DOUBLE:
     case GCC_JIT_TYPE_COMPLEX_LONG_DOUBLE:
+    case GCC_JIT_TYPE_SHORT_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_SHORT_FRACT:
+    case GCC_JIT_TYPE_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_FRACT:
+    case GCC_JIT_TYPE_LONG_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_FRACT:
+    case GCC_JIT_TYPE_LONG_LONG_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG_FRACT:
+    case GCC_JIT_TYPE_SHORT_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_SHORT_ACCUM:
+    case GCC_JIT_TYPE_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_ACCUM:
+    case GCC_JIT_TYPE_LONG_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_ACCUM:
+    case GCC_JIT_TYPE_LONG_LONG_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG_ACCUM:
       /* Not a pointer: */
       return NULL;
 
@@ -2744,6 +2776,24 @@ recording::memento_of_get_type::is_int () const
     case GCC_JIT_TYPE_COMPLEX_DOUBLE:
     case GCC_JIT_TYPE_COMPLEX_LONG_DOUBLE:
       return false;
+
+    case GCC_JIT_TYPE_SHORT_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_SHORT_FRACT:
+    case GCC_JIT_TYPE_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_FRACT:
+    case GCC_JIT_TYPE_LONG_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_FRACT:
+    case GCC_JIT_TYPE_LONG_LONG_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG_FRACT:
+    case GCC_JIT_TYPE_SHORT_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_SHORT_ACCUM:
+    case GCC_JIT_TYPE_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_ACCUM:
+    case GCC_JIT_TYPE_LONG_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_ACCUM:
+    case GCC_JIT_TYPE_LONG_LONG_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG_ACCUM:
+      return false;
     }
 }
 
@@ -2798,6 +2848,23 @@ recording::memento_of_get_type::is_signed () const
     case GCC_JIT_TYPE_COMPLEX_FLOAT:
     case GCC_JIT_TYPE_COMPLEX_DOUBLE:
     case GCC_JIT_TYPE_COMPLEX_LONG_DOUBLE:
+
+    case GCC_JIT_TYPE_SHORT_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_SHORT_FRACT:
+    case GCC_JIT_TYPE_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_FRACT:
+    case GCC_JIT_TYPE_LONG_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_FRACT:
+    case GCC_JIT_TYPE_LONG_LONG_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG_FRACT:
+    case GCC_JIT_TYPE_SHORT_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_SHORT_ACCUM:
+    case GCC_JIT_TYPE_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_ACCUM:
+    case GCC_JIT_TYPE_LONG_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_ACCUM:
+    case GCC_JIT_TYPE_LONG_LONG_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG_ACCUM:
       return false;
     }
 }
@@ -2863,6 +2930,106 @@ recording::memento_of_get_type::is_float () const
     case GCC_JIT_TYPE_COMPLEX_DOUBLE:
     case GCC_JIT_TYPE_COMPLEX_LONG_DOUBLE:
       return true;
+
+    case GCC_JIT_TYPE_SHORT_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_SHORT_FRACT:
+    case GCC_JIT_TYPE_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_FRACT:
+    case GCC_JIT_TYPE_LONG_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_FRACT:
+    case GCC_JIT_TYPE_LONG_LONG_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG_FRACT:
+    case GCC_JIT_TYPE_SHORT_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_SHORT_ACCUM:
+    case GCC_JIT_TYPE_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_ACCUM:
+    case GCC_JIT_TYPE_LONG_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_ACCUM:
+    case GCC_JIT_TYPE_LONG_LONG_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG_ACCUM:
+      return false;
+    }
+}
+
+/* Implementation of pure virtual hook recording::type::is_fixed for
+   recording::memento_of_get_type.  */
+
+bool
+recording::memento_of_get_type::is_fixed () const
+{
+  switch (m_kind)
+    {
+    default: gcc_unreachable ();
+
+    case GCC_JIT_TYPE_VOID:
+      return false;
+
+    case GCC_JIT_TYPE_VOID_PTR:
+      return false;
+
+    case GCC_JIT_TYPE_BOOL:
+      return false;
+
+    case GCC_JIT_TYPE_CHAR:
+    case GCC_JIT_TYPE_SIGNED_CHAR:
+    case GCC_JIT_TYPE_UNSIGNED_CHAR:
+    case GCC_JIT_TYPE_SHORT:
+    case GCC_JIT_TYPE_UNSIGNED_SHORT:
+    case GCC_JIT_TYPE_INT:
+    case GCC_JIT_TYPE_UNSIGNED_INT:
+    case GCC_JIT_TYPE_LONG:
+    case GCC_JIT_TYPE_UNSIGNED_LONG:
+    case GCC_JIT_TYPE_LONG_LONG:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG:
+    case GCC_JIT_TYPE_UINT8_T:
+    case GCC_JIT_TYPE_UINT16_T:
+    case GCC_JIT_TYPE_UINT32_T:
+    case GCC_JIT_TYPE_UINT64_T:
+    case GCC_JIT_TYPE_UINT128_T:
+    case GCC_JIT_TYPE_INT8_T:
+    case GCC_JIT_TYPE_INT16_T:
+    case GCC_JIT_TYPE_INT32_T:
+    case GCC_JIT_TYPE_INT64_T:
+    case GCC_JIT_TYPE_INT128_T:
+      return false;
+
+    case GCC_JIT_TYPE_FLOAT:
+    case GCC_JIT_TYPE_BFLOAT16:
+    case GCC_JIT_TYPE_DOUBLE:
+    case GCC_JIT_TYPE_LONG_DOUBLE:
+      return false;
+
+    case GCC_JIT_TYPE_CONST_CHAR_PTR:
+      return false;
+
+    case GCC_JIT_TYPE_SIZE_T:
+      return false;
+
+    case GCC_JIT_TYPE_FILE_PTR:
+      return false;
+
+    case GCC_JIT_TYPE_COMPLEX_FLOAT:
+    case GCC_JIT_TYPE_COMPLEX_DOUBLE:
+    case GCC_JIT_TYPE_COMPLEX_LONG_DOUBLE:
+      return false;
+
+    case GCC_JIT_TYPE_SHORT_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_SHORT_FRACT:
+    case GCC_JIT_TYPE_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_FRACT:
+    case GCC_JIT_TYPE_LONG_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_FRACT:
+    case GCC_JIT_TYPE_LONG_LONG_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG_FRACT:
+    case GCC_JIT_TYPE_SHORT_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_SHORT_ACCUM:
+    case GCC_JIT_TYPE_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_ACCUM:
+    case GCC_JIT_TYPE_LONG_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_ACCUM:
+    case GCC_JIT_TYPE_LONG_LONG_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG_ACCUM:
+      return true;
     }
 }
 
@@ -2926,6 +3093,24 @@ recording::memento_of_get_type::is_bool () const
     case GCC_JIT_TYPE_COMPLEX_FLOAT:
     case GCC_JIT_TYPE_COMPLEX_DOUBLE:
     case GCC_JIT_TYPE_COMPLEX_LONG_DOUBLE:
+      return false;
+
+    case GCC_JIT_TYPE_SHORT_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_SHORT_FRACT:
+    case GCC_JIT_TYPE_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_FRACT:
+    case GCC_JIT_TYPE_LONG_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_FRACT:
+    case GCC_JIT_TYPE_LONG_LONG_FRACT:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG_FRACT:
+    case GCC_JIT_TYPE_SHORT_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_SHORT_ACCUM:
+    case GCC_JIT_TYPE_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_ACCUM:
+    case GCC_JIT_TYPE_LONG_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_ACCUM:
+    case GCC_JIT_TYPE_LONG_LONG_ACCUM:
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG_ACCUM:
       return false;
     }
 }
@@ -2991,6 +3176,23 @@ static const char * const get_type_strings[] = {
   "__int128_t",   /* GCC_JIT_TYPE_INT128_T */
   "bfloat16",     /* GCC_JIT_TYPE_BFLOAT16 */
 
+  "short fract", /* GCC_JIT_TYPE_SHORT_FRACT */
+  "unsigned short fract", /* GCC_JIT_TYPE_UNSIGNED_SHORT_FRACT */
+  "fract", /* GCC_JIT_TYPE_FRACT */
+  "unsigned fract", /* GCC_JIT_TYPE_UNSIGNED_FRACT */
+  "long fract", /* GCC_JIT_TYPE_LONG_FRACT */
+  "unsigned long fract", /* GCC_JIT_TYPE_UNSIGNED_LONG_FRACT */
+  "long long fract", /* GCC_JIT_TYPE_LONG_LONG_FRACT */
+  "unsigned long long fract", /* GCC_JIT_TYPE_UNSIGNED_LONG_LONG_FRACT */
+  "short accum", /* GCC_JIT_TYPE_SHORT_ACCUM */
+  "unsigned short accum", /* GCC_JIT_TYPE_UNSIGNED_SHORT_ACCUM */
+  "accum", /* GCC_JIT_TYPE_ACCUM */
+  "unsigned accum", /* GCC_JIT_TYPE_UNSIGNED_ACCUM */
+  "long accum", /* GCC_JIT_TYPE_LONG_ACCUM */
+  "unsigned long accum", /* GCC_JIT_TYPE_UNSIGNED_LONG_ACCUM */
+  "long long accum", /* GCC_JIT_TYPE_LONG_LONG_ACCUM */
+  "unsigned long long accum", /* GCC_JIT_TYPE_UNSIGNED_LONG_LONG_ACCUM */
+
 };
 
 /* Implementation of recording::memento::make_debug_string for
@@ -3037,6 +3239,21 @@ static const char * const get_type_enum_strings[] = {
   "GCC_JIT_TYPE_INT64_T",
   "GCC_JIT_TYPE_INT128_T",
   "GCC_JIT_TYPE_BFLOAT16",
+  "GCC_JIT_TYPE_SHORT_FRACT",
+  "GCC_JIT_TYPE_UNSIGNED_SHORT_FRACT",
+  "GCC_JIT_TYPE_FRACT",
+  "GCC_JIT_TYPE_UNSIGNED_FRACT",
+  "GCC_JIT_TYPE_LONG_FRACT",
+  "GCC_JIT_TYPE_UNSIGNED_LONG_FRACT",
+  "GCC_JIT_TYPE_LONG_LONG_FRACT",
+  "GCC_JIT_TYPE_UNSIGNED_LONG_LONG_FRACT",
+  "GCC_JIT_TYPE_SHORT_ACCUM",
+  "GCC_JIT_TYPE_UNSIGNED_SHORT_ACCUM",
+  "GCC_JIT_TYPE_ACCUM",
+  "GCC_JIT_TYPE_UNSIGNED_ACCUM",
+  "GCC_JIT_TYPE_LONG_ACCUM",
+  "GCC_JIT_TYPE_UNSIGNED_LONG_ACCUM",
+  "GCC_JIT_TYPE_LONG_LONG_ACCUM",
 };
 
 void

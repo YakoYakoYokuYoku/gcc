@@ -575,8 +575,8 @@ gcc_jit_type_get_size (gcc_jit_type *type)
 {
   RETURN_VAL_IF_FAIL (type, -1, NULL, NULL, "NULL type");
   RETURN_VAL_IF_FAIL
-    (type->is_int () || type->is_float (), -1, NULL, NULL,
-     "only getting the size of integer or floating-point types is supported for now");
+    (type->is_int () || type->is_float () || type->is_fixed (), -1, NULL, NULL,
+     "only getting the size of integer, floating-point or fixed-point types is supported for now");
   return type->get_size ();
 }
 
@@ -2480,15 +2480,21 @@ is_valid_cast (gcc::jit::recording::type *src_type,
   bool dst_is_int = dst_type->is_int ();
   bool src_is_float = src_type->is_float ();
   bool dst_is_float = dst_type->is_float ();
+  bool src_is_fixed = src_type->is_fixed ();
+  bool dst_is_fixed = dst_type->is_fixed ();
   bool src_is_bool = src_type->is_bool ();
   bool dst_is_bool = dst_type->is_bool ();
 
   if (src_is_int)
-    if (dst_is_int || dst_is_float || dst_is_bool)
+    if (dst_is_int || dst_is_float || dst_is_fixed || dst_is_bool)
       return true;
 
   if (src_is_float)
-    if (dst_is_int || dst_is_float)
+    if (dst_is_int || dst_is_float || dst_is_fixed)
+      return true;
+
+  if (src_is_fixed)
+    if (dst_is_int || dst_is_float || dst_is_fixed)
       return true;
 
   if (src_is_bool)

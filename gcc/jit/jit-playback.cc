@@ -303,6 +303,42 @@ get_tree_node_for_type (enum gcc_jit_types type_)
       return complex_double_type_node;
     case GCC_JIT_TYPE_COMPLEX_LONG_DOUBLE:
       return complex_long_double_type_node;
+
+    case GCC_JIT_TYPE_SHORT_FRACT:
+      return short_fract_type_node;
+    case GCC_JIT_TYPE_FRACT:
+      return fract_type_node;
+    case GCC_JIT_TYPE_LONG_FRACT:
+      return long_fract_type_node;
+    case GCC_JIT_TYPE_LONG_LONG_FRACT:
+      return long_long_fract_type_node;
+    case GCC_JIT_TYPE_SHORT_ACCUM:
+      return short_accum_type_node;
+    case GCC_JIT_TYPE_ACCUM:
+      return accum_type_node;
+    case GCC_JIT_TYPE_LONG_ACCUM:
+      return long_accum_type_node;
+    case GCC_JIT_TYPE_LONG_LONG_ACCUM:
+      return long_long_accum_type_node;
+    case GCC_JIT_TYPE_UNSIGNED_SHORT_FRACT:
+      return unsigned_short_fract_type_node;
+    case GCC_JIT_TYPE_UNSIGNED_FRACT:
+      return unsigned_fract_type_node;
+    case GCC_JIT_TYPE_UNSIGNED_LONG_FRACT:
+      return unsigned_long_fract_type_node;
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG_FRACT:
+      return unsigned_long_long_fract_type_node;
+    case GCC_JIT_TYPE_UNSIGNED_SHORT_ACCUM:
+      return unsigned_short_accum_type_node;
+    case GCC_JIT_TYPE_UNSIGNED_ACCUM:
+      return unsigned_accum_type_node;
+    case GCC_JIT_TYPE_UNSIGNED_LONG_ACCUM:
+      return unsigned_long_accum_type_node;
+    case GCC_JIT_TYPE_UNSIGNED_LONG_LONG_ACCUM:
+      return unsigned_long_long_accum_type_node;
+
+    default:
+      break;
     }
 
   add_error (NULL, "unrecognized (enum gcc_jit_types) value: %i",
@@ -3844,6 +3880,22 @@ if (t) \
   NAME_TYPE (complex_float_type_node, "complex float");
   NAME_TYPE (complex_double_type_node, "complex double");
   NAME_TYPE (complex_long_double_type_node, "complex long double");
+  NAME_TYPE (short_fract_type_node, "short _Fract");
+  NAME_TYPE (fract_type_node, "_Fract");
+  NAME_TYPE (long_fract_type_node, "long _Fract");
+  NAME_TYPE (long_long_fract_type_node, "long long _Fract");
+  NAME_TYPE (short_accum_type_node, "short _Accum");
+  NAME_TYPE (accum_type_node, "_Accum");
+  NAME_TYPE (long_accum_type_node, "long _Accum");
+  NAME_TYPE (long_long_accum_type_node, "long long _Accum");
+  NAME_TYPE (unsigned_short_fract_type_node, "unsigned short _Fract");
+  NAME_TYPE (unsigned_fract_type_node, "unsigned _Fract");
+  NAME_TYPE (unsigned_long_fract_type_node, "unsigned long _Fract");
+  NAME_TYPE (unsigned_long_long_fract_type_node, "unsigned long long _Fract");
+  NAME_TYPE (unsigned_short_accum_type_node, "unsigned short _Accum");
+  NAME_TYPE (unsigned_accum_type_node, "unsigned _Accum");
+  NAME_TYPE (unsigned_long_accum_type_node, "unsigned long _Accum");
+  NAME_TYPE (unsigned_long_long_accum_type_node, "unsigned long long _Accum");
 
   m_const_char_ptr = build_pointer_type(
     build_qualified_type (char_type_node, TYPE_QUAL_CONST));

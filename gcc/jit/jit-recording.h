@@ -635,6 +635,7 @@ public:
 
   virtual bool is_int () const = 0;
   virtual bool is_float () const = 0;
+  virtual bool is_fixed () const = 0;
   virtual bool is_bool () const = 0;
   virtual bool is_numeric_vector () const { return false; }
   virtual type *is_pointer () = 0;
@@ -652,7 +653,7 @@ public:
 
   bool is_numeric () const
   {
-    return is_int () || is_float () || is_bool ();
+    return is_int () || is_float () || is_fixed () || is_bool ();
   }
 
   playback::type *
@@ -712,6 +713,7 @@ public:
 
   bool is_int () const final override;
   bool is_float () const final override;
+  bool is_fixed () const final override;
   bool is_bool () const final override;
   type *is_pointer () final override { return dereference (); }
   type *is_array () final override { return NULL; }
@@ -754,6 +756,7 @@ public:
 
   bool is_int () const final override { return false; }
   bool is_float () const final override { return false; }
+  bool is_fixed () const final override { return false; }
   bool is_bool () const final override { return false; }
   type *is_pointer () final override { return m_other_type; }
   type *is_array () final override { return NULL; }
@@ -783,6 +786,7 @@ public:
 
   bool is_int () const override { return m_other_type->is_int (); }
   bool is_float () const final override { return m_other_type->is_float (); }
+  bool is_fixed () const final override { return m_other_type->is_fixed (); }
   bool is_bool () const final override { return m_other_type->is_bool (); }
   bool is_numeric_vector () const override {
       return m_other_type->is_numeric_vector ();
@@ -1027,6 +1031,7 @@ class array_type : public type
 
   bool is_int () const final override { return false; }
   bool is_float () const final override { return false; }
+  bool is_fixed () const final override { return false; }
   bool is_bool () const final override { return false; }
   type *is_pointer () final override { return NULL; }
   type *is_array () final override { return m_element_type; }
@@ -1075,6 +1080,7 @@ public:
 
   bool is_int () const final override { return false; }
   bool is_float () const final override { return false; }
+  bool is_fixed () const final override { return false; }
   bool is_bool () const final override { return false; }
   type *is_pointer () final override { return NULL; }
   type *is_array () final override { return NULL; }
@@ -1191,6 +1197,7 @@ public:
 
   bool is_int () const final override { return false; }
   bool is_float () const final override { return false; }
+  bool is_fixed () const final override { return false; }
   bool is_bool () const final override { return false; }
   type *is_pointer () final override { return NULL; }
   type *is_array () final override { return NULL; }

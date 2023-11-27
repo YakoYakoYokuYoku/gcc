@@ -1106,6 +1106,23 @@ jit_langhook_type_for_mode (machine_mode mode, int unsignedp)
   if (mode == TYPE_MODE (double_type_node))
     return double_type_node;
 
+  if (mode == TYPE_MODE (short_fract_type_node))
+    return unsignedp ? unsigned_short_fract_type_node : short_fract_type_node;
+  if (mode == TYPE_MODE (fract_type_node))
+    return unsignedp ? unsigned_fract_type_node : fract_type_node;
+  if (mode == TYPE_MODE (long_fract_type_node))
+    return unsignedp ? unsigned_long_fract_type_node : long_fract_type_node;
+  if (mode == TYPE_MODE (long_long_fract_type_node))
+    return unsignedp ? unsigned_long_long_fract_type_node : long_long_fract_type_node;
+  if (mode == TYPE_MODE (short_accum_type_node))
+    return unsignedp ? unsigned_short_accum_type_node : short_accum_type_node;
+  if (mode == TYPE_MODE (accum_type_node))
+    return unsignedp ? unsigned_accum_type_node : accum_type_node;
+  if (mode == TYPE_MODE (long_accum_type_node))
+    return unsignedp ? unsigned_long_accum_type_node : long_accum_type_node;
+  if (mode == TYPE_MODE (long_long_accum_type_node))
+    return unsignedp ? unsigned_long_long_accum_type_node : long_long_accum_type_node;
+
   if (mode == TYPE_MODE (intQI_type_node))
     return unsignedp ? unsigned_intQI_type_node : intQI_type_node;
   if (mode == TYPE_MODE (intHI_type_node))
@@ -1256,6 +1273,70 @@ recording::type* tree_type_to_jit_type (tree type)
   else if (type == dfloat128_type_node)
   {
     return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_VOID); // FIXME: wrong type.
+  }
+  else if (type == short_fract_type_node)
+  {
+    return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_SHORT_FRACT);
+  }
+  else if (type == fract_type_node)
+  {
+    return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_FRACT);
+  }
+  else if (type == long_fract_type_node)
+  {
+    return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_LONG_FRACT);
+  }
+  else if (type == long_long_fract_type_node)
+  {
+    return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_LONG_LONG_FRACT);
+  }
+  else if (type == short_accum_type_node)
+  {
+    return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_SHORT_ACCUM);
+  }
+  else if (type == accum_type_node)
+  {
+    return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_ACCUM);
+  }
+  else if (type == long_accum_type_node)
+  {
+    return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_LONG_ACCUM);
+  }
+  else if (type == long_long_accum_type_node)
+  {
+    return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_LONG_LONG_ACCUM);
+  }
+  else if (type == unsigned_short_fract_type_node)
+  {
+    return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_UNSIGNED_SHORT_FRACT);
+  }
+  else if (type == unsigned_fract_type_node)
+  {
+    return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_UNSIGNED_FRACT);
+  }
+  else if (type == unsigned_long_fract_type_node)
+  {
+    return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_UNSIGNED_LONG_FRACT);
+  }
+  else if (type == unsigned_long_long_fract_type_node)
+  {
+    return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_UNSIGNED_LONG_LONG_FRACT);
+  }
+  else if (type == unsigned_short_accum_type_node)
+  {
+    return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_UNSIGNED_SHORT_ACCUM);
+  }
+  else if (type == unsigned_accum_type_node)
+  {
+    return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_UNSIGNED_ACCUM);
+  }
+  else if (type == unsigned_long_accum_type_node)
+  {
+    return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_UNSIGNED_LONG_ACCUM);
+  }
+  else if (type == unsigned_long_long_accum_type_node)
+  {
+    return new recording::memento_of_get_type (&target_builtins_ctxt, GCC_JIT_TYPE_UNSIGNED_LONG_LONG_ACCUM);
   }
   else if (type == long_long_unsigned_type_node)
   {
