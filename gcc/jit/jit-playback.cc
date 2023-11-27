@@ -3212,6 +3212,14 @@ append_arg_from_driver (const char *option, void *user_data)
   argvec->safe_push (concat ("-", option, NULL));
 }
 
+/* Return the target name. */
+
+const char *
+playback::context::target_name ()
+{
+  return TARGET_NAME;
+}
+
 /* Build a fake argv for toplev::main from the options set
    by the user on the context .  */
 

@@ -120,6 +120,8 @@ jit.serial = $(LIBGCCJIT_FILENAME)
 # Tell GNU make to ignore these if they exist.
 .PHONY: jit
 
+CFLAGS-jit/jit-playback.o += -DTARGET_NAME=\"$(target_noncanonical)\"
+
 JIT_OBJS = attribs.o \
 	jit/dummy-frontend.o \
 	jit/libgccjit.o \

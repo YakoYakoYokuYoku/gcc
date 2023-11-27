@@ -371,6 +371,9 @@ private:
   void unlock ();
   struct scoped_lock;
 
+  const char *
+  target_name ();
+
   void
   make_fake_args (vec <char *> *argvec,
 		  const char *ctxt_progname,
