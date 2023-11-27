@@ -138,7 +138,7 @@ avr_archs_str (void)
   // Build of core architectures' names.
 
   for (const avr_mcu_t *mcu = avr_mcu_types; mcu->name; mcu++)
-    if (!mcu->macro)
+    // if (!mcu->macro)
       archs = concat (archs, " ", avr_arch_types[mcu->arch_id].name, NULL);
 
   return archs;

@@ -1824,6 +1824,8 @@ recording::context::dump_to_file (const char *path, bool update_locations)
 static const char * const
  str_option_reproducer_strings[GCC_JIT_NUM_STR_OPTIONS] = {
   "GCC_JIT_STR_OPTION_PROGNAME"
+  "GCC_JIT_STR_OPTION_MODE_CPU"
+  "GCC_JIT_STR_OPTION_MODE_MCU"
 };
 
 static const char * const

@@ -3220,6 +3220,11 @@ playback::context::target_name ()
   return TARGET_NAME;
 }
 
+static inline char *
+add_mode_flag (const char *mode, const char *arg) {
+  return xasprintf ("-m%s=%s", mode, arg);
+}
+
 /* Build a fake argv for toplev::main from the options set
    by the user on the context .  */
 
@@ -3236,7 +3241,15 @@ make_fake_args (vec <char *> *argvec,
 
   ADD_ARG (ctxt_progname);
   ADD_ARG (get_path_c_file ());
-  ADD_ARG ("-fPIC");
+
+  if (std::string(target_name()) == "avr") {
+    const char *mcu = get_str_option(GCC_JIT_STR_OPTION_MODE_MCU);
+    if (mcu) ADD_ARG_TAKE_OWNERSHIP (add_mode_flag ("mcu", mcu));
+  } else {
+    const char *cpu = get_str_option(GCC_JIT_STR_OPTION_MODE_CPU);
+    if (cpu) ADD_ARG_TAKE_OWNERSHIP (add_mode_flag ("cpu", cpu));
+    ADD_ARG ("-fPIC");
+  }
 
   /* Handle int options: */
   switch (get_int_option (GCC_JIT_INT_OPTION_OPTIMIZATION_LEVEL))
@@ -3496,7 +3509,22 @@ invoke_driver (const char *ctxt_progname,
 
   ADD_ARG (gcc_driver_name);
 
-  add_multilib_driver_arguments (&argvec);
+  const char *driver_arg = NULL;
+  if (std::string(target_name()) == "avr")
+    driver_arg = get_str_option(GCC_JIT_STR_OPTION_MODE_MCU);
+  else
+    driver_arg = get_str_option(GCC_JIT_STR_OPTION_MODE_CPU);
+  if (driver_arg) {
+    char *mode_arg;
+    if (std::string(target_name()) == "avr") {
+      mode_arg = add_mode_flag ("mcu", driver_arg);
+    } else {
+      mode_arg = add_mode_flag ("cpu", driver_arg);
+    }
+    argvec.safe_push (mode_arg);
+  } else {
+    add_multilib_driver_arguments (&argvec);
+  }
 
   if (shared)
     ADD_ARG ("-shared");

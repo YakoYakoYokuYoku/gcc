@@ -1058,7 +1058,7 @@ avr_set_core_architecture (void)
 	}
       else if (strcmp (mcu->name, avr_mmcu) == 0
 	       // Is this a proper architecture ?
-	       && mcu->macro == NULL)
+	       /*&& mcu->macro == NULL*/)
 	{
 	  avr_arch = &avr_arch_types[mcu->arch_id];
 	  avr_arch_index = mcu->arch_id;

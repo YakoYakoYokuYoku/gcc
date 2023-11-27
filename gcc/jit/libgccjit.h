@@ -175,6 +175,12 @@ enum gcc_jit_str_option
      messages to stderr.  If NULL, or default, "libgccjit.so" is used.  */
   GCC_JIT_STR_OPTION_PROGNAME,
 
+  /* Targeting CPU */
+  GCC_JIT_STR_OPTION_MODE_CPU,
+
+  /* Targeting MCU (avr) */
+  GCC_JIT_STR_OPTION_MODE_MCU,
+
   GCC_JIT_NUM_STR_OPTIONS
 };
 
