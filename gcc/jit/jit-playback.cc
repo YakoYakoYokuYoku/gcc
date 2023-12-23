@@ -3245,6 +3245,7 @@ make_fake_args (vec <char *> *argvec,
   if (std::string(target_name()) == "avr") {
     const char *mcu = get_str_option(GCC_JIT_STR_OPTION_MODE_MCU);
     if (mcu) ADD_ARG_TAKE_OWNERSHIP (add_mode_flag ("mcu", mcu));
+    ADD_ARG ("-mdouble=64");
   } else {
     const char *cpu = get_str_option(GCC_JIT_STR_OPTION_MODE_CPU);
     if (cpu) ADD_ARG_TAKE_OWNERSHIP (add_mode_flag ("cpu", cpu));
@@ -3507,7 +3508,8 @@ invoke_driver (const char *ctxt_progname,
   auto_string_vec argvec;
 #define ADD_ARG(arg) argvec.safe_push (xstrdup (arg))
 
-  ADD_ARG (gcc_driver_name);
+  //ADD_ARG (gcc_driver_name);
+  ADD_ARG (ctxt_progname);
 
   const char *driver_arg = NULL;
   if (std::string(target_name()) == "avr")
@@ -3525,6 +3527,9 @@ invoke_driver (const char *ctxt_progname,
   } else {
     add_multilib_driver_arguments (&argvec);
   }
+
+  if (std::string(target_name()) == "avr")
+    ADD_ARG ("-mdouble=64");
 
   if (shared)
     ADD_ARG ("-shared");
